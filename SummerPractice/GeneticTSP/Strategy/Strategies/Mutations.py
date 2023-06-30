@@ -1,4 +1,4 @@
-from ../Interfaces import IMutation
+from ..Interfaces import IMutation
 
 
 class RandomMutation(IMutation):
