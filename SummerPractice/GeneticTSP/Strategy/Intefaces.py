@@ -1,4 +1,4 @@
-from ABC import ABC, abstractmethod
+from abc import ABC, abstractmethod
 
 class IMutation(ABC):
     def __init__(self):
