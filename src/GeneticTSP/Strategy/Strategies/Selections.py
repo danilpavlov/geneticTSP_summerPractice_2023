@@ -1,17 +1,19 @@
 from ..Interfaces import * 
 
 
-class LowestFitnessSelection(ISelection):
+class TournamentSelection(ISelection):
     """
-    Производим отбор популяции по наименьшему значению всех ослобей популяции, 
-        после чего удаляем особи 
+    Турнирная селекция — сначала случайно выбирается установленное количество 
+        особей (в данном случае 2), а затем из них выбирается особь с лучшим значением 
+        функции приспособленности
     """
-
     def execute(self, population: Population) -> None:
-        population_set = population.get()
 
-        population_set= dict(
-                sorted(population_set.items(), key=lambda item : item[1])
-                ) 
+        while len(population.get()) > population.get_max_number():
+            challenger1, challenger2 = population.get_random_individuals(2)
+            fitness1, fitness2 = population.get()[challenger1], population.get()[challenger2]
 
-        self._kill_unadapted_individuals(population)
+            if fitness1 < fitness2:
+                population.remove(challenger1, fitness1)
+            else:
+                population.remove(challenger2, fitness2)

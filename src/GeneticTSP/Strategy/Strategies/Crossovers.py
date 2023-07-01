@@ -1,12 +1,14 @@
 from ..Interfaces import ICrossover
 
 
-class RandomCrossover(ICrossover):
+class SinglePointCrossover(ICrossover):
     """
-    Выбираем две случайные особи из популяции и меняем местами некоторые гены
-        одной особи на второй
+    До некоторого гена-маркера, родители обмениваются цепочками генов, 
+        тем самым порождая двух потомков
+    """
+    def execute(self, parent_selection: IParentSelection, population: Population, crossover_rate: float) -> None:
 
-    """
-    def execute(self, population: Population, crossover_rate: float) -> None:
+        if crossover_rate < 0 or crossover_rate > 1:
+            raise ValueError("Вероятность скрещивания < 0 или > 1")
+
         pass
-
