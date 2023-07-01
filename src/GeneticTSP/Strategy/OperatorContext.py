@@ -7,18 +7,15 @@ class OperatorContext():
         self.selection_strategy = None
         self.crossover_strategy = None
 
-    def mutation(self, population: Dict[Tuple[int, ...], float], 
-                 mutation_rate: float) -> None:
+    def mutation(self, population: Population, mutation_rate: float) -> None:
         if self.mutation_strategy is not None:
             self.mutation_strategy.execute(population, mutation_rate)
 
-    def selection(self, population: Dict[Tuple[int, ...], float], 
-                  population_max_number: int) -> None:
+    def selection(self, population: Population) -> None:
         if self.selection_strategy is not None:
-            self.selection_strategy.execute(population, population_max_number)
+            self.selection_strategy.execute(population)
 
-    def crossover(self, population: Dict[Tuple[int, ...], float],
-                  crossover_rate: float) -> None:
+    def crossover(self, population: Population, crossover_rate: float) -> None:
         if self.crossover_strategy is not None:
             self.crossover_strategy.execute(population, crossover_rate)
 
