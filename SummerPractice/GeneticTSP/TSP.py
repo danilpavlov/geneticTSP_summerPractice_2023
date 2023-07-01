@@ -1,17 +1,7 @@
 from Caretaker import Caretaker
 from Strategy.OperatorContext import * 
 
-from dataclasses import dataclass
 import random
-
-
-@dataclass
-class Node:
-    """
-    Класс вершины (aka город)
-    """
-    x: float
-    y: float 
 
 
 class TSP:

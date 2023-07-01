@@ -21,7 +21,12 @@ class Adapter:
     def get_adjacency_matrix(self):
         return self.adjacency_matrix
 
-    def make_adjacency_matrix(self):
+    def make_adjacency_matrix(self, node_set):
+        """
+        Создание матрицы смежности
+        
+        @param: node_set -- множество всех вершин
+        """      
 
         pass
 
@@ -30,8 +35,8 @@ class Adapter:
         """
         Находит евклидово расстояние между двумя точками в двумерном пространстве.
         """
-        x1, y1 = node1
-        x2, y2 = node2
+        x1, y1 = node1.x, node1.y
+        x2, y2 = node2.x, node2.y
 
         distance = sqrt((x2 - x1)**2 + (y2 - y1)**2)
         return distance
