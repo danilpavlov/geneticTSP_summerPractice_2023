@@ -1,4 +1,5 @@
 from ..Interfaces import ICrossover
+from typing import Dict, Tuple
 
 
 class RandomCrossover(ICrossover):
@@ -7,6 +8,6 @@ class RandomCrossover(ICrossover):
         одной особи на второй
 
     """
-    def execute(self, population):
+    def execute(self, population: Dict[Tuple[int, ...], float] ) -> None:
         pass
 

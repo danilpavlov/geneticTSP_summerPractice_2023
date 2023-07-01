@@ -2,10 +2,12 @@ from Caretaker import Caretaker
 from Strategy.OperatorContext import * 
 
 import random
+from typing import List
 
 
 class TSP:
-    def __init__(self, adjacency_matrix, generations_number, population_max_number):
+    def __init__(self, adjacency_matrix: List[List[float]], 
+                 generations_number: int, population_max_number: int):
         """
         @param: adjacency_matrix -- матрица смежности графа
 
@@ -22,24 +24,22 @@ class TSP:
         
         self.caretaker = Caretaker()
 
-        self.mutation_context = OperatorContext()
-        self.crossover_context = OperatorContext()
-        self.selection_context = OperatorContext()
+        self.operator_context = OperatorContext()
 
 
     def solve(self):
         pass
 
-    def choose_method(self, mutation, crossover, selection):
+    def choose_operators(self, mutation: IMutation, 
+                      crossover: ICrossover, selection: ISelection) -> None:
         """
         Выбораем конкретные операторы мутации, кроссовера и селекции
         """
+        self.operator_context.choose_mutation(mutation)
+        self.operator_context.choose_crossover(crossover)
+        self.operator_context.choose_selection(selection)
 
-        self.mutation_context.choose(mutation)
-        self.crossover_context.choose(crossover)
-        self.selection_context.choose(selection)
-
-    def __generate_population(self):
+    def __generate_population(self) -> None:
         """
         Создание начальной популяции
         """
