@@ -1,5 +1,4 @@
-from ..Interfaces import ISelection
-from typing import Dict, Tuple
+from ..Interfaces import * 
 
 
 class LowestFitnessSelection(ISelection):
@@ -8,10 +7,11 @@ class LowestFitnessSelection(ISelection):
         после чего удаляем особи 
     """
 
-    def execute(self, population: Dict[Tuple[int, ...], float], 
-                population_max_number: int) -> None:
-        population = dict(
-                sorted(population.items(), key=lambda item : item[1])
+    def execute(self, population: Population) -> None:
+        population_set = population.get()
+
+        population_set= dict(
+                sorted(population_set.items(), key=lambda item : item[1])
                 ) 
 
-        self._kill_unadapted_individuals(population, population_max_number)
+        self._kill_unadapted_individuals(population)

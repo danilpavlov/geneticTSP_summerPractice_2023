@@ -1,7 +1,7 @@
 from Caretaker import Caretaker
+from Population import Population
 from Strategy.OperatorContext import * 
 
-import random
 from typing import List
 
 
@@ -15,12 +15,9 @@ class TSP:
 
         @param: population_max_number -- максимальный размер популяции
         """
+        self.population = Population(adjacency_matrix, population_max_number)
 
-        self.population = {} # ключ - картеж пути; значение - приспособленность
-
-        self.adjacency_matrix = adjacency_matrix
         self.generations_number = generations_number
-        self.population_max_number = population_max_number
         
         self.caretaker = Caretaker()
 
@@ -39,25 +36,4 @@ class TSP:
         self.operator_context.choose_crossover(crossover)
         self.operator_context.choose_selection(selection)
 
-    def __generate_population(self) -> None:
-        """
-        Создание начальной популяции
-        """
-
-        for _ in range(self.population_max_number):
-
-            seen_nodes = []
-            fitness = 0
-            while len(seen_nodes) != len(self.adjacency_matrix):
-
-                # Выбираем случайный номер вершины, относительно размера
-                # матрицы смжености. Если он еще не был просмотрен - 
-                # заносим Его в Просмотренные Вершины и прибавляем 
-                # к Значению Приспособленности значение пути в матрице смежности. 
-                node_index = random.randint(0, len(self.adjacency_matrix) - 1)
-                if node_index not in seen_nodes:
-
-                    seen_nodes.append(node_index)
-                    fitness += self.adjacency_matrix[len(seen_nodes)][node_index]
-            self.population.update({tuple(seen_nodes): fitness}) 
                 
