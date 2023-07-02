@@ -7,7 +7,9 @@ from typing import List
 
 class TSP:
     def __init__(self, adjacency_matrix: List[List[float]], 
-                 generations_number: int, population_max_number: int):
+                 generations_number: int, population_max_number: int,
+                 mutation_rate: float, crossover_rate: float):
+                    
         """
         @param: adjacency_matrix -- матрица смежности графа
 
@@ -15,6 +17,10 @@ class TSP:
 
         @param: population_max_number -- максимальный размер популяции
         """
+        self.mutation_rate = mutation_rate
+        self.crossover_rate = crossover_rate
+        self.__rate_validation()
+
         self.population = Population(adjacency_matrix, population_max_number)
 
         self.generations_number = generations_number
@@ -40,4 +46,9 @@ class TSP:
         self.operator_context.choose_selection(selection)
         self.operator_context.choose_parent_selection(parent_selection)
 
+    def __rate_validation(self) -> None:
+        if self.mutation_rate < 0 or self.mutation_rate > 1:
+            raise ValueError("Mutation rate is < 0 or > 1")
+        if self.crossover_rate < 0 or self.crossover_rate > 1:
+            raise ValueError("Crossover rate is < 0 or > 1")
                 

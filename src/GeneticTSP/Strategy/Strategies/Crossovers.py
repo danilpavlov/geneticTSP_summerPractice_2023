@@ -7,10 +7,6 @@ class SinglePointCrossover(ICrossover):
         тем самым порождая двух потомков
     """
     def execute(self, parent_selection: IParentSelection, population: Population, crossover_rate: float) -> None:
-
-        if crossover_rate < 0 or crossover_rate > 1:
-            raise ValueError("Вероятность скрещивания < 0 или > 1")
-
         parent1, parent2 = parent_selection.execute(population)
 
         marker = random.randint(1, len(parent1) - 1)
@@ -25,10 +21,6 @@ class TwoPointCrossover(ICrossover):
         случайно выбранных точках особи (В данном случае точки 2).
     """
     def execute(self, parent_selection: IParentSelection, population: Population, crossover_rate: float) -> None:
-
-        if crossover_rate < 0 or crossover_rate > 1:
-            raise ValueError("Вероятность скрещивания < 0 или > 1")
-
         parent1, parent2 = parent_selection.execute(population)
 
 
@@ -38,9 +30,5 @@ class UniformCrossover(ICrossover):
         случайным образом от одного из родителей.
     """
     def execute(self, parent_selection: IParentSelection, population: Population, crossover_rate: float) -> None:
-
-        if crossover_rate < 0 or crossover_rate > 1:
-            raise ValueError("Вероятность скрещивания < 0 или > 1")
-
         parent1, parent2 = parent_selection.execute(population)
 

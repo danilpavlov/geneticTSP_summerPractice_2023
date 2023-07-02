@@ -6,10 +6,6 @@ class SwapMutation(IMutation):
     Выбираем в популяции случайную особь и меняем у нее два случайных гена местами. 
     """
     def execute(self, population: Population, mutation_rate: float) -> None:
-
-        if mutation_rate < 0 or mutation_rate > 1:
-            raise ValueError("Вероятность мутации < 0 или > 1")
-
         for _ in range( round(mutation_rate * 100) ):
             random_individual = random.choice( list(population.get().keys()) )
 
@@ -43,10 +39,6 @@ class UniformMutation(IMutation):
         вероятность быть измененной.
     """
     def execute(self, population: Population, mutation_rate: float) -> None:
-
-        if mutation_rate < 0 or mutation_rate > 1:
-            raise ValueError("Вероятность мутации < 0 или > 1")
-
         pass
 
 
@@ -55,8 +47,4 @@ class InversionMutation(IMutation):
     В инверсии происходит обратное перестроение части особи.
     """
     def execute(self, population: Population, mutation_rate: float) -> None:
-
-        if mutation_rate < 0 or mutation_rate > 1:
-            raise ValueError("Вероятность мутации < 0 или > 1")
-
         pass

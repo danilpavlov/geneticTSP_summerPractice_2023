@@ -10,19 +10,41 @@ class Panmixia(IParentSelection):
         return tuple(population.get_random_individuals(2))
 
 
-class Inbreeding(IParentSelection):
+class TournamentSelection(IParentSelection):
     """
-    Первый родитель выбирается случайным образом, а вторым родителем 
-        является член популяции ближайший к первому (по расстоянию Хемминга)
-    """
-    def execute(self, population: Population) -> Tuple[Tuple[int, ...], Tuple[int, ...]]: 
-        pass
-
-
-class Outbreeding(IParentSelection):
-    """
-    Первый родитель выбирается случайным образом, а вторым родителем 
-        является член популяции наиболее отличный от первого (по расстоянию Хемминга)
+    Турнирная селекция — сначала случайно выбирается установленное количество 
+        особей, а затем из них выбирается особь с лучшим значением функции приспособленности
     """
     def execute(self, population: Population) -> Tuple[Tuple[int, ...], Tuple[int, ...]]: 
-        pass
+        winners = []
+        while len(winners) < 2:
+            challenger1, challenger2 = population.get_random_individuals(2)
+            fitness1, fitness2 = population.get()[challenger1], population.get()[challenger2]
+            if fitness1 > fitness2:
+                winners.append(challenger1)
+            else:
+                winners.append(challenger2)
+        return tuple(winners)
+
+
+class RoulleteWheelSelection(IParentSelection):
+    """
+    Особи выбираются пропорционально их приспособленности. 
+        Более приспособленные особи имеют больший шанс быть выбранными, 
+        поскольку их приспособленность увеличивает их долю на колесе рулетки
+    """
+    def execute(self, population: Population) -> Tuple[Tuple[int, ...], Tuple[int, ...]]: 
+        average_value = sum(population.get().values())
+        winners = []
+
+        while len(winners) < 2:
+            random_individual = random.choice( list(population.get()) )
+            fitness = population.get()[random_individual]
+
+            random_chance = random.uniform(0, 1)
+            if random_chance < (fitness / average_value):
+                winners.append(random_individual)
+
+        return tuple(winners)
+
+
