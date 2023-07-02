@@ -1,4 +1,4 @@
-from ..Interfaces import ICrossover
+from ..Interfaces import *
 
 
 class SinglePointCrossover(ICrossover):
@@ -11,4 +11,32 @@ class SinglePointCrossover(ICrossover):
         if crossover_rate < 0 or crossover_rate > 1:
             raise ValueError("Вероятность скрещивания < 0 или > 1")
 
-        pass
+        parent1, parent2 = parent_selection.execute(population)
+
+
+class TwoPointCrossover(ICrossover):
+    """
+    Этот вид скрещивания аналогичен одноточечному скрещиванию, но 
+        в данном случае может происходить обмен генами в нескольких 
+        случайно выбранных точках особи (В данном случае точки 2).
+    """
+    def execute(self, parent_selection: IParentSelection, population: Population, crossover_rate: float) -> None:
+
+        if crossover_rate < 0 or crossover_rate > 1:
+            raise ValueError("Вероятность скрещивания < 0 или > 1")
+
+        parent1, parent2 = parent_selection.execute(population)
+
+
+class UniformCrossover(ICrossover):
+    """
+    При равномерном скрещивании каждый ген в потомке выбирается 
+        случайным образом от одного из родителей.
+    """
+    def execute(self, parent_selection: IParentSelection, population: Population, crossover_rate: float) -> None:
+
+        if crossover_rate < 0 or crossover_rate > 1:
+            raise ValueError("Вероятность скрещивания < 0 или > 1")
+
+        parent1, parent2 = parent_selection.execute(population)
+

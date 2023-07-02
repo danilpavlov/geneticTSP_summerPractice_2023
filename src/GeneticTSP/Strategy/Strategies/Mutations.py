@@ -4,9 +4,9 @@ from typing import Tuple
 import random
 
 
-class RandomMutation(IMutation):
+class SwapMutation(IMutation):
     """
-    Выбираем в популяции случайную особь и меняем два случайных гена местами. 
+    Выбираем в популяции случайную особь и меняем у нее два случайных гена местами. 
     """
     def execute(self, population: Population, mutation_rate: float) -> None:
 
@@ -39,3 +39,27 @@ class RandomMutation(IMutation):
 
         return tuple(mutant)
 
+
+class UniformMutation(IMutation):
+    """
+    При равномерной мутации каждая позиция в особи имеет небольшую 
+        вероятность быть измененной.
+    """
+    def execute(self, population: Population, mutation_rate: float) -> None:
+
+        if mutation_rate < 0 or mutation_rate > 1:
+            raise ValueError("Вероятность мутации < 0 или > 1")
+
+        pass
+
+
+class InversionMutation(IMutation):
+    """
+    В инверсии происходит обратное перестроение части особи.
+    """
+    def execute(self, population: Population, mutation_rate: float) -> None:
+
+        if mutation_rate < 0 or mutation_rate > 1:
+            raise ValueError("Вероятность мутации < 0 или > 1")
+
+        pass

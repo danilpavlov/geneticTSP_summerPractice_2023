@@ -10,3 +10,21 @@ class Panmixia(IParentSelection):
     """
     def execute(self, population: Population) -> Tuple[Tuple[int, ...], Tuple[int, ...]]:
         return tuple(population.get_random_individuals(2))
+
+
+class Inbreeding(IParentSelection):
+    """
+    Первый родитель выбирается случайным образом, а вторым родителем 
+        является член популяции ближайший к первому (по расстоянию Хемминга)
+    """
+    def execute(self, population: Population) -> Tuple[Tuple[int, ...], Tuple[int, ...]]: 
+        pass
+
+
+class Outbreeding(IParentSelection):
+    """
+    Первый родитель выбирается случайным образом, а вторым родителем 
+        является член популяции наиболее далекий к первому (по расстоянию Хемминга)
+    """
+    def execute(self, population: Population) -> Tuple[Tuple[int, ...], Tuple[int, ...]]: 
+        pass

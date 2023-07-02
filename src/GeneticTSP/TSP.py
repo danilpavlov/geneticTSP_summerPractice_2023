@@ -24,16 +24,20 @@ class TSP:
         self.operator_context = OperatorContext()
 
 
-    def solve(self):
+    def run(self):
         pass
 
     def choose_operators(self, mutation: IMutation, 
-                      crossover: ICrossover, selection: ISelection) -> None:
+                         crossover: ICrossover, 
+                         selection: ISelection,
+                         parent_selection: IParentSelection,
+                        ) -> None:
         """
         Выбораем конкретные операторы мутации, кроссовера и селекции
         """
         self.operator_context.choose_mutation(mutation)
         self.operator_context.choose_crossover(crossover)
         self.operator_context.choose_selection(selection)
+        self.operator_context.choose_selection(parent_selection)
 
                 
