@@ -4,22 +4,7 @@ from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.backends.backend_qtagg import NavigationToolbar2QT as NavigationToolbar
-
-
-class GUI:
-    def __init__(self):
-        import sys
-        self.app = QtWidgets.QApplication(sys.argv)
-        self.MainWindow = QtWidgets.QMainWindow()
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self.MainWindow)
-        self.MainWindow.show()
-        #sys.exit(self.app.exec_())
-        self.app.exec_()
-
-    def get_ui(self):
-        return self.ui
-
+from Mediator import *
 
 
 class MyPaintWidget(QtWidgets.QWidget):
@@ -116,7 +101,7 @@ class Ui_MainWindow(object):
         self.pushButton.setFont(font)
         self.pushButton.setObjectName("pushButton")
 
-        self.ready = 0
+        self.mediator = None
 
         self.sc = MyPaintWidget(self.centralwidget)
         self.sc.setGeometry(300, 10, 481, 531)
@@ -203,8 +188,12 @@ class Ui_MainWindow(object):
         self.label_3.setText(_translate("MainWindow", "Вероятность мутации"))
         self.label_4.setText(_translate("MainWindow", "Вероятность кроссинговера"))
 
+    def set_mediator(self, mediator):
+        self.mediator = mediator
+
     def add_functions(self):
         self.pushButton.clicked.connect(self.start)
 
     def start(self):
-        self.ready = 1
+        self.mediator.run()
+        #здесь добавим отрисовку полученного результата
