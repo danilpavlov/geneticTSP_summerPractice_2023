@@ -1,4 +1,5 @@
 from ..Population import Population
+from ..Structures import Rates
 
 from typing import Protocol, Tuple
 import random
@@ -6,7 +7,7 @@ import random
 
 class IMutation(Protocol):
 
-    def execute(self, population: Population, mutation_rate: float) -> None:
+    def execute(self, individual: Tuple[int, ...]):
         """
         Оператор мутации -- замена некоторого числа генов какой-то особи
         """
@@ -24,7 +25,7 @@ class IParentSelection(Protocol):
 
 class ICrossover(Protocol):
 
-    def execute(self, parent_selection: IParentSelection, population: Population, crossover_rate: float) -> None:
+    def execute(self, parent_selection: IParentSelection, population: Population, rates: Rates) -> None:
         """ 
         Оператор скрещивания -- 'шафл' генов у некоторого числа особей
         """

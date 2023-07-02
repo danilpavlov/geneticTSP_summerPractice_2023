@@ -1,8 +1,6 @@
 from ..Interfaces import * 
 
 
-
-
 class RandomSelection(ISelection):
     """
     Особи выбираются случайным образом без учета их приспособленности 

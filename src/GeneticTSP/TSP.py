@@ -1,8 +1,7 @@
-from Caretaker import Caretaker
-from Population import Population
+from Caretaker import *
+from Population import *
 from Strategy.OperatorContext import * 
-
-from typing import List
+from Structures import *
 
 
 class TSP:
@@ -17,18 +16,16 @@ class TSP:
 
         @param: population_max_number -- максимальный размер популяции
         """
-        self.mutation_rate = mutation_rate
-        self.crossover_rate = crossover_rate
-        self.__rate_validation()
 
         self.population = Population(adjacency_matrix, population_max_number)
+
+        self.rates = Rates(mutation_rate, crossover_rate)
 
         self.generations_number = generations_number
         
         self.caretaker = Caretaker()
 
         self.operator_context = OperatorContext()
-
 
     def run(self):
         pass
@@ -46,9 +43,3 @@ class TSP:
         self.operator_context.choose_selection(selection)
         self.operator_context.choose_parent_selection(parent_selection)
 
-    def __rate_validation(self) -> None:
-        if self.mutation_rate < 0 or self.mutation_rate > 1:
-            raise ValueError("Mutation rate is < 0 or > 1")
-        if self.crossover_rate < 0 or self.crossover_rate > 1:
-            raise ValueError("Crossover rate is < 0 or > 1")
-                

@@ -2,7 +2,7 @@ from ..Interfaces import *
 
 
 class Panmixia(IParentSelection):
-    """
+    """!
     Панмиксия — оба родителя выбираются случайно, 
         каждая особь популяции имеет равные шансы быть выбранной
     """
@@ -10,8 +10,8 @@ class Panmixia(IParentSelection):
         return tuple(population.get_random_individuals(2))
 
 
-class TournamentSelection(IParentSelection):
-    """
+class TournamentParentSelection(IParentSelection):
+    """!
     Турнирная селекция — сначала случайно выбирается установленное количество 
         особей, а затем из них выбирается особь с лучшим значением функции приспособленности
     """
@@ -27,8 +27,8 @@ class TournamentSelection(IParentSelection):
         return tuple(winners)
 
 
-class RoulleteWheelSelection(IParentSelection):
-    """
+class RoulleteWheelParentSelection(IParentSelection):
+    """!
     Особи выбираются пропорционально их приспособленности. 
         Более приспособленные особи имеют больший шанс быть выбранными, 
         поскольку их приспособленность увеличивает их долю на колесе рулетки

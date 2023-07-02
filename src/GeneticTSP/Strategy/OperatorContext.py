@@ -8,16 +8,16 @@ class OperatorContext():
         self.crossover_strategy = None
         self.parent_selection_strategy = None
 
-    def mutation(self, population: Population, mutation_rate: float) -> None:
-        if self.mutation_strategy is not None:
-            self.mutation_strategy.execute(population, mutation_rate)
-
     def selection(self, population: Population) -> None:
         if self.selection_strategy is not None:
             self.selection_strategy.execute(population)
 
     def crossover(self, population: Population, crossover_rate: float) -> None:
-        if self.crossover_strategy is not None and self.parent_selection_strategy is not None:
+        if (self.crossover_strategy is not None and 
+            self.parent_selection_strategy is not None and
+            self.mutation_strategy is not None
+            ):
+            
             self.crossover_strategy.execute(self.parent_selection_strategy, population, crossover_rate)
     
     def choose_mutation(self, mutation_strategy: IMutation) -> None:

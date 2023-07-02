@@ -19,9 +19,10 @@ class Population:
         Возвращает заданное число случайных особей популяции
         """
         individuals = []
-        for _ in range(amount):
+        while len(individuals) < amount:
             random_individual = random.choice( list(self.population.keys()) )
-            individuals.append(random_individual)
+            if random_individual not in individuals:
+                individuals.append(random_individual)
 
         return individuals
 
