@@ -24,7 +24,11 @@ class RandomSelection(ISelection):
     Особи выбираются случайным образом без учета их приспособленности 
     """
     def execute(self, population: Population) -> None:
-        pass
+
+        while len(population.get()) > population.get_max_number():
+            random_individual = random.choice( list(population.get()) ) 
+            fitness = population.get()[random_individual]
+            population.remove(random_individual, fitness)
 
 
 class RoulleteWheelSelection(ISelection):

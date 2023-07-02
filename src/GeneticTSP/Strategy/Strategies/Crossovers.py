@@ -13,6 +13,10 @@ class SinglePointCrossover(ICrossover):
 
         parent1, parent2 = parent_selection.execute(population)
 
+        marker = random.randint(1, len(parent1) - 1)
+
+
+
 
 class TwoPointCrossover(ICrossover):
     """

@@ -1,11 +1,6 @@
 from dataclasses import dataclass
 from math import sqrt
-
-
-@dataclass
-class Node:
-    x: int
-    y: int 
+from typing import List, Tuple
 
 
 class Adapter:
@@ -17,27 +12,24 @@ class Adapter:
     def __init__(self):
         self.adjacency_matrix = []
 
-
-    def get_adjacency_matrix(self):
+    def get_adjacency_matrix(self) -> List[List[float]]:
         return self.adjacency_matrix
 
-    def make_adjacency_matrix(self, node_set):
-        """
-        Создание матрицы смежности
+    def make_adjacency_matrix(self, node_set: List[List[float]]) -> None:
         
-        @param: node_set -- множество всех вершин
-        """      
+        self.adjacency_matrix = [[] for _ in range(len(node_set))]
 
-        pass
+        for i in range(len(node_set)):
 
+            for j in range(len(node_set)):
+                distance = self.__euclidean_distance(tuple(node_set[i]), tuple(node_set[j]))
+                self.adjacency_matrix[i].append(distance)
 
-    def __euclidean_distance(self, node1, node2):
+    def __euclidean_distance(self, node1: Tuple[float, float], node2: Tuple[float, float]) -> float:
         """
         Находит евклидово расстояние между двумя точками в двумерном пространстве.
         """
-        x1, y1 = node1.x, node1.y
-        x2, y2 = node2.x, node2.y
-
-        distance = sqrt((x2 - x1)**2 + (y2 - y1)**2)
-        return distance
+        x1, y1 = node1
+        x2, y2 = node2
+        return sqrt((x2 - x1)**2 + (y2 - y1)**2)
 

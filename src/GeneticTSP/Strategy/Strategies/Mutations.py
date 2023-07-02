@@ -1,8 +1,5 @@
 from ..Interfaces import *
 
-from typing import Tuple
-import random
-
 
 class SwapMutation(IMutation):
     """

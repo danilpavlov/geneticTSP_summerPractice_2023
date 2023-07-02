@@ -1,7 +1,5 @@
 from ..Interfaces import *
 
-from typing import Tuple
-
 
 class Panmixia(IParentSelection):
     """
@@ -24,7 +22,7 @@ class Inbreeding(IParentSelection):
 class Outbreeding(IParentSelection):
     """
     Первый родитель выбирается случайным образом, а вторым родителем 
-        является член популяции наиболее далекий к первому (по расстоянию Хемминга)
+        является член популяции наиболее отличный от первого (по расстоянию Хемминга)
     """
     def execute(self, population: Population) -> Tuple[Tuple[int, ...], Tuple[int, ...]]: 
         pass

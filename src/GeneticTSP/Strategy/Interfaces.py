@@ -1,6 +1,7 @@
 from ..Population import Population
 
-from typing import Protocol
+from typing import Protocol, Tuple
+import random
 
 
 class IMutation(Protocol):

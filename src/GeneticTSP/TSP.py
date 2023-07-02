@@ -38,6 +38,6 @@ class TSP:
         self.operator_context.choose_mutation(mutation)
         self.operator_context.choose_crossover(crossover)
         self.operator_context.choose_selection(selection)
-        self.operator_context.choose_selection(parent_selection)
+        self.operator_context.choose_parent_selection(parent_selection)
 
                 
