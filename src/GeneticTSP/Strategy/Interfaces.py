@@ -25,7 +25,7 @@ class IParentSelection(Protocol):
 
 class ICrossover(Protocol):
 
-    def execute(self, parent_selection: IParentSelection, population: Population, rates: Rates) -> None:
+    def execute(self, parent_selection: IParentSelection, mutation: IMutation, population: Population, rates: Rates) -> None:
         """ 
         Оператор скрещивания -- 'шафл' генов у некоторого числа особей
         """

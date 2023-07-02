@@ -18,7 +18,7 @@ class OperatorContext():
             self.mutation_strategy is not None
             ):
             
-            self.crossover_strategy.execute(self.parent_selection_strategy, population, crossover_rate)
+            self.crossover_strategy.execute(self.parent_selection_strategy, self.mutation_strategy, population, crossover_rate)
     
     def choose_mutation(self, mutation_strategy: IMutation) -> None:
         self.mutation_strategy = mutation_strategy
