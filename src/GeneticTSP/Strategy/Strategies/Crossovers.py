@@ -9,7 +9,7 @@ class SinglePointCrossover(ICrossover):
     def execute(self, parent_selection: IParentSelection, mutation: IMutation, population: Population, rates: Rates) -> None:
         parent1, parent2 = parent_selection.execute(population)
         
-        marker = random.randint(1, len(parent1) - 1)
+        marker = random.randint(1, len(parent1[:-1]) - 1)
 
         child1 = parent1[:marker] + parent2[marker:]
         child2 = parent2[:marker] + parent1[marker:]
@@ -17,8 +17,8 @@ class SinglePointCrossover(ICrossover):
         child1 = self.__individual_validation(child1)
         child2 = self.__individual_validation(child2)
 
-        child1 = self.__try_to_mutate(child1, mutation, rates)
-        child2 = self.__try_to_mutate(child2, mutation, rates)
+        child1 = self._try_to_mutate(child1, mutation, rates)
+        child2 = self._try_to_mutate(child2, mutation, rates)
 
         fitness1 = population.calculate_fitness(child1)
         fitness2 = population.calculate_fitness(child2)
@@ -37,21 +37,38 @@ class SinglePointCrossover(ICrossover):
         return tuple(better_child)
 
 
-    def __try_to_mutate(self, individual: Tuple[int, ...], mutation: IMutation, rates: Rates) -> Tuple[int, ...]:
-        mutate_chance = random.uniform(0, 1)
-        if mutate_chance < rates.mutation:
-            return mutation.execute(individual)
-        return individual
-
-
 class TwoPointCrossover(ICrossover):
     """
     Этот вид скрещивания аналогичен одноточечному скрещиванию, но 
         в данном случае может происходить обмен генами в нескольких 
         случайно выбранных точках особи (В данном случае точки 2).
     """
-    def execute(self, parent_selection: IParentSelection, population: Population, rates: Rates) -> None:
+    def execute(self, parent_selection: IParentSelection, mutation: IMutation, population: Population, rates: Rates) -> None:
         parent1, parent2 = parent_selection.execute(population)
+
+        crossover_markers = random.sample(range(1, len(parent1[:-1])), 2)
+        crossover_markers.sort()
+        
+        child1 = (
+                parent2[:crossover_markers[0]] + 
+                parent1[crossover_markers[0]:crossover_markers[1]] +
+                parent2[crossover_markers[1]:]
+                )
+
+        child1 = (
+                parent1[:crossover_markers[0]] + 
+                parent2[crossover_markers[0]:crossover_markers[1]] +
+                parent1[crossover_markers[1]:]
+                )
+
+        child1 = self._try_to_mutate(tuple(child1), mutation, rates)
+        child2 = self._try_to_mutate(tuple(child1), mutation, rates)
+        
+        fitness1 = population.calculate_fitness(child1)
+        fitness2 = population.calculate_fitness(child2)
+        
+        population.add(child1, fitness1)
+        population.add(child2, fitness2)
 
 
 class UniformCrossover(ICrossover):
@@ -59,6 +76,30 @@ class UniformCrossover(ICrossover):
     При равномерном скрещивании каждый ген в потомке выбирается 
         случайным образом от одного из родителей.
     """
-    def execute(self, parent_selection: IParentSelection, population: Population, rates: Rates) -> None:
+    def execute(self, parent_selection: IParentSelection, mutation: IMutation, population: Population, rates: Rates) -> None:
         parent1, parent2 = parent_selection.execute(population)
+
+        child1 = []
+        child2 = []
+
+        for i in range(len(parent1) - 1):
+            random_number = random.randint(0, 1)
+            if random_number == 0:
+                child1.append(parent1[i])
+                child2.append(parent2[i])
+            else:
+                child1.append(parent2[i])
+                child2.append(parent1[i])
+
+        child1.append(child1[0])
+        child2.append(child2[0])
+
+        child1 = self._try_to_mutate(tuple(child1), mutation, rates)
+        child2 = self._try_to_mutate(tuple(child2), mutation, rates)
+
+        fitness1 = population.calculate_fitness(child1)
+        fitness2 = population.calculate_fitness(child2)
+
+        population.add(child1, fitness1)
+        population.add(child2, fitness2)
 

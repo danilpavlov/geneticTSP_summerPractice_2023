@@ -1,7 +1,7 @@
 from ..Population import Population
 from ..Structures import Rates
 
-from typing import Protocol, Tuple
+from typing import Protocol, Tuple, List
 import random
 
 
@@ -30,6 +30,13 @@ class ICrossover(Protocol):
         Оператор скрещивания -- 'шафл' генов у некоторого числа особей
         """
         pass
+
+    def _try_to_mutate(self, individual: Tuple[int, ...], mutation: IMutation, rates: Rates) -> Tuple[int, ...]:
+        mutate_chance = random.uniform(0, 1)
+        if mutate_chance < rates.mutation:
+            return mutation.execute(individual)
+        return individual
+
 
 
 class ISelection(Protocol):

@@ -1,6 +1,5 @@
 from ..Interfaces import *
 
-
 class SwapMutation(IMutation):
     """!
     Выбираем в популяции случайную особь и меняем у нее два случайных гена местами. 
