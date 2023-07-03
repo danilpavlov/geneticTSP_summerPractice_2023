@@ -17,9 +17,12 @@ class Population:
 
     def get_generations_number(self) -> int:
         return self.generations_number
-
-    def decrement_generations_number(self) -> None:
-        self.generations_number -= 1
+    
+    def get_max_number(self) -> int:
+        """
+        Получение максимального числа особей в Популяции
+        """
+        return self.population_max_number 
 
     def get_random_individuals(self, amount: int) -> List[Tuple[int, ...]]:
         """
@@ -45,12 +48,6 @@ class Population:
         """
         self.population.pop(individual, fitness)
 
-    def get_max_number(self) -> int:
-        """
-        Получение максимального числа особей в Популяции
-        """
-        return self.population_max_number 
-
     def calculate_fitness(self, individual: Tuple[int, ...]) -> float:
         """
         Считает значение приспособленности особи исходя из таблицы смежности
@@ -68,16 +65,17 @@ class Population:
         """
         for _ in range(self.population_max_number):
 
-            seen_nodes = []
-            while len(seen_nodes) != len(self.adjacency_matrix):
+            individual = []
+            while len(individual) != len(self.adjacency_matrix):
 
                 # Выбираем случайный номер вершины, относительно размера
                 # матрицы смжености. Если он еще не был просмотрен - 
                 # заносим Его в Просмотренные Вершины 
                 node_index = random.randint(0, len(self.adjacency_matrix) - 1)
-                if node_index not in seen_nodes:
+                if node_index not in individual:
 
-                    seen_nodes.append(node_index)
+                    individual.append(node_index)
+            individual.append(individual[0])
 
-            fitness = self.calculate_fitness(tuple(seen_nodes))
-            self.population.update({tuple(seen_nodes): fitness}) 
+            fitness = self.calculate_fitness(tuple(individual))
+            self.population.update({tuple(individual): fitness}) 

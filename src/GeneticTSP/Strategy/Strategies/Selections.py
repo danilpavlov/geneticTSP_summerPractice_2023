@@ -29,9 +29,10 @@ class EliteSelection(ISelection):
                 )
 
         population.set({})
+        elite_individuals_percent = 0.1
 
         for i, key in enumerate(sorted_population):
-            if i <= 0.1 * len(sorted_population):
+            if i <= (elite_individuals_percent * len(sorted_population)):
                 population.add(key, sorted_population[key])
             else:
                 random_individual = random.choice( list(sorted_population) )
@@ -51,15 +52,18 @@ class ExclusionSelection(ISelection):
         selection_coefficient = 0.4
 
         for first_individual in population.get():
-            if len(new_population) > population.get_max_number():
+            if len(new_population) >= population.get_max_number():
                 break
+            fitness1 = population.calculate_fitness(first_individual)
+            new_population.update({first_individual: fitness1})
 
             for second_individual in population.get():
                 different_genes = self.__different_genes_amount(first_individual, second_individual)
                 if different_genes >= (selection_coefficient * len(first_individual)):
-                    fitness = population.calculate_fitness(second_individual)
-                    new_population.update({second_individual: fitness})
-                if len(new_population) > population.get_max_number():
+                    fitness2 = population.calculate_fitness(second_individual)
+                    new_population.update({second_individual: fitness2})
+
+                if len(new_population) >= population.get_max_number():
                     break
         population.set(new_population)
 

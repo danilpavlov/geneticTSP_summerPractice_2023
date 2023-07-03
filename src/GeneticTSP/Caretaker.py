@@ -1,4 +1,4 @@
-from Population import Population
+from Population import *
 
 
 class Caretaker:
@@ -10,3 +10,4 @@ class Caretaker:
         
     def get_history(self):
         return self.population_history
+    

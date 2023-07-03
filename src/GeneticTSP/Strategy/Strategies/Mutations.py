@@ -6,8 +6,7 @@ class SwapMutation(IMutation):
     """
     def execute(self, individual: Tuple[int, ...]) -> Tuple[int, ...]:
         mutant = list(individual[:-1])
-        idx1 = random.randint(0, len(mutant) - 1)
-        idx2 = random.randint(0, len(mutant) - 1)
+        idx1, idx2 = random.sample(range(len(mutant)), 2)
         mutant[idx1], mutant[idx2] = mutant[idx2], mutant[idx1]
         mutant.append(mutant[0])
         return tuple(mutant)
@@ -42,8 +41,7 @@ class ScrambleMutation(IMutation):
     """
     def execute(self, individual: Tuple[int, ...]) -> Tuple[int, ...]:
         mutant = list(individual[:-1])
-        idx1 = random.randint(0, len(mutant) - 1)
-        idx2 = random.randint(0, len(mutant) - 1)
+        idx1, idx2 = random.sample(range(len(mutant)), 2)
 
         start_idx = min(idx1, idx2)
         end_idx = max(idx1, idx2)

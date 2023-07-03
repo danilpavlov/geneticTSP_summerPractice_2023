@@ -1,5 +1,7 @@
-from ..Population import Population
-from ..Structures import Rates
+import sys
+sys.path.append("..")
+from Population import *
+from Structures import *
 
 from typing import Protocol, Tuple, List
 import random

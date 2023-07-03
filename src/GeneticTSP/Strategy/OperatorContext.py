@@ -1,4 +1,5 @@
-from Interfaces import *
+from Strategy.Interfaces import *
+
 
 class OperatorContext():
     
@@ -12,13 +13,13 @@ class OperatorContext():
         if self.selection_strategy is not None:
             self.selection_strategy.execute(population)
 
-    def crossover(self, population: Population, crossover_rate: float) -> None:
+    def crossover(self, population: Population, rates: Rates) -> None:
         if (self.crossover_strategy is not None and 
             self.parent_selection_strategy is not None and
             self.mutation_strategy is not None
             ):
             
-            self.crossover_strategy.execute(self.parent_selection_strategy, self.mutation_strategy, population, crossover_rate)
+            self.crossover_strategy.execute(self.parent_selection_strategy, self.mutation_strategy, population, rates)
     
     def choose_mutation(self, mutation_strategy: IMutation) -> None:
         self.mutation_strategy = mutation_strategy
