@@ -17,12 +17,10 @@ class TSP:
         @param: population_max_number -- максимальный размер популяции
         """
 
-        self.population = Population(adjacency_matrix, population_max_number)
+        self.population = Population(adjacency_matrix, population_max_number, generations_number)
 
         self.rates = Rates(mutation_rate, crossover_rate)
 
-        self.generations_number = generations_number
-        
         self.caretaker = Caretaker()
 
         self.operator_context = OperatorContext()

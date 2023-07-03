@@ -3,16 +3,23 @@ import random
 
 
 class Population:
-    def __init__(self, adjacency_matrix: List[List[float]], population_max_number: int):
+    def __init__(self, adjacency_matrix: List[List[float]], population_max_number: int, generations_number: int):
         self.population = {} # Ключ - гамильтонов цикл, Значение - его приспособленность (длина цикла)
         self.adjacency_matrix = adjacency_matrix
         self.population_max_number = population_max_number
+        self.generations_number = generations_number
 
     def get(self) -> Dict[Tuple[int, ...], float]:
-        """
-        Возвращает популяцию
-        """
         return self.population
+
+    def set(self, new_population: Dict[Tuple[int, ...], float]):
+        self.population = new_population
+
+    def get_generations_number(self) -> int:
+        return self.generations_number
+
+    def decrement_generations_number(self) -> None:
+        self.generations_number -= 1
 
     def get_random_individuals(self, amount: int) -> List[Tuple[int, ...]]:
         """
