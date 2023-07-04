@@ -9,6 +9,7 @@ class SwapMutation(IMutation):
         idx1, idx2 = random.sample(range(len(mutant)), 2)
         mutant[idx1], mutant[idx2] = mutant[idx2], mutant[idx1]
         mutant.append(mutant[0])
+
         return tuple(mutant)
 
 
@@ -20,7 +21,7 @@ class UniformMutation(IMutation):
     def execute(self, individual: Tuple[int, ...]) -> Tuple[int, ...]:
         not_seen = list(individual[:-1])
         mutant = []
-        gene_mutation_chance = 0.1
+        gene_mutation_chance = 0.4
         for gene in individual[:-1]:
             random_chance = random.uniform(0, 1)
             if random_chance < gene_mutation_chance or gene not in not_seen:
