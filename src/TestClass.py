@@ -26,14 +26,6 @@ class Testing():
 
 
 test = Testing()
-<<<<<<< HEAD
-'''
-#node_set = [[1.1, 1.1], [2.1, 2.3], [3.1, 3.0]]
-node_set = config.node_set
-population_size = 10
-generations_number = 10
-mutation_rate = 0.1
-=======
 
 node_set = [[1.1, 1.1], [2.1, 2.3], [3.1, 3.0], [100.1, 124.4]]
 population_size = 20
@@ -41,15 +33,11 @@ generations_number = 1000
 mutation_rate = 0.15
 >>>>>>> b64795b (fixed Uniform Crossover and TwoPointCrossover)
 crossover_rate = 0.8
-'''
 
-<<<<<<< HEAD
 #population_history = test.execute(read_f.node_set, read_f.population_size, read_f.generations_number, read_f.mutation_rate, read_f.crossover_rate)
 #population_history = test.execute(data.node_set, data.population_size, data.generations_number, data.mutation_rate, data.crossover_rate)
 #print(population_history)
-=======
 population_history = test.execute(node_set, population_size, generations_number, mutation_rate, crossover_rate)
 print(population_history[0])
 print(population_history[-1])
 
->>>>>>> b64795b (fixed Uniform Crossover and TwoPointCrossover)
