@@ -1,7 +1,5 @@
-import sys
-sys.path.append("..")
-from Population import *
-from Structures import *
+from GeneticTSP.Population import *
+from GeneticTSP.Structures import *
 
 from typing import Protocol, Tuple, List
 import random

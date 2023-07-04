@@ -1,4 +1,4 @@
-from Strategy.Interfaces import *
+from GeneticTSP.Strategy.Interfaces import *
 
 
 class OperatorContext():

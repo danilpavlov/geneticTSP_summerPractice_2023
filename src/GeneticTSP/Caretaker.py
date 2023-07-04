@@ -1,4 +1,4 @@
-from Population import *
+from GeneticTSP.Population import *
 
 
 class Caretaker:

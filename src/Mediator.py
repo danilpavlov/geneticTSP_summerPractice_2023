@@ -1,7 +1,3 @@
-from GeneticTSP.Strategy.Strategies.Mutations import *
-from GeneticTSP.Strategy.Strategies.Crossovers import *
-from GeneticTSP.Strategy.Strategies.Selections import *
-from GeneticTSP.TSP import *
 
 from GUI.gui import *
 
@@ -30,3 +26,4 @@ class Mediator:
         """
 
         return self.window.sc.get_cities #здесь будем возвращать результат работы алгоритма
+

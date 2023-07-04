@@ -1,4 +1,4 @@
-from ..Interfaces import *
+from GeneticTSP.Strategy.Interfaces import *
 
 class SwapMutation(IMutation):
     """!

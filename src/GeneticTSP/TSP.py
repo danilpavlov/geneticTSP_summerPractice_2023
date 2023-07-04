@@ -1,7 +1,6 @@
-from Caretaker import *
-from Population import *
-from Strategy.OperatorContext import * 
-from Structures import *
+from GeneticTSP.Caretaker import *
+from GeneticTSP.Strategy.OperatorContext import * 
+from GeneticTSP.Structures import *
 
 
 class TSP:
