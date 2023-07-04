@@ -1,11 +1,14 @@
 from GeneticTSP.Population import *
 from GeneticTSP.Structures import *
+from GeneticTSP.Logger import *
 
 from typing import Protocol, Tuple, List
 import random
 
 
 class IMutation(Protocol):
+    def __init__(self, logger: Logger):
+        pass
 
     def execute(self, individual: Tuple[int, ...]):
         """
@@ -15,7 +18,6 @@ class IMutation(Protocol):
 
 
 class IParentSelection(Protocol):
-
     def execute(self, population: Population): 
         """
         Оператор выбора родителей для дальнейшего скрещивания
@@ -24,6 +26,8 @@ class IParentSelection(Protocol):
 
 
 class ICrossover(Protocol):
+    def __init__(self, logger: Logger):
+        pass
 
     def execute(self, parent_selection: IParentSelection, mutation: IMutation, population: Population, rates: Rates) -> None:
         """ 
@@ -38,9 +42,7 @@ class ICrossover(Protocol):
         return individual
 
 
-
 class ISelection(Protocol):
-
     def execute(self, population: Population) -> None:
         """
         Оператор селекции -- правило отбора особей внутри популяции

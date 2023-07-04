@@ -6,6 +6,9 @@ class SinglePointCrossover(ICrossover):
     До некоторого гена-маркера, родители обмениваются цепочками генов, 
         тем самым порождая двух потомков
     """
+    def __init__(self, logger: Logger):
+        self.logger = logger
+
     def execute(self, parent_selection: IParentSelection, mutation: IMutation, population: Population, rates: Rates) -> None:
         parent1, parent2 = parent_selection.execute(population)
         
@@ -22,6 +25,8 @@ class SinglePointCrossover(ICrossover):
 
         fitness1 = population.calculate_fitness(child1)
         fitness2 = population.calculate_fitness(child2)
+
+        self.logger.add_log(self, parent1, parent2, child1, child2, population)
 
         population.add(child1, fitness1)
         population.add(child2, fitness2)
@@ -43,6 +48,9 @@ class TwoPointCrossover(ICrossover):
         в данном случае может происходить обмен генами в нескольких 
         случайно выбранных точках особи (В данном случае точки 2).
     """
+    def __init__(self, logger: Logger):
+        self.logger = logger
+
     def execute(self, parent_selection: IParentSelection, mutation: IMutation, population: Population, rates: Rates) -> None:
         parent1, parent2 = parent_selection.execute(population)
 
@@ -57,6 +65,8 @@ class TwoPointCrossover(ICrossover):
         
         fitness1 = population.calculate_fitness(child1)
         fitness2 = population.calculate_fitness(child2)
+        
+        self.logger.add_log(self, parent1, parent2, child1, child2, population)
         
         population.add(child1, fitness1)
         population.add(child2, fitness2)
@@ -84,6 +94,9 @@ class UniformCrossover(ICrossover):
     При равномерном скрещивании каждый ген в потомке выбирается 
         случайным образом от одного из родителей.
     """
+    def __init__(self, logger: Logger):
+        self.logger = logger
+
     def execute(self, parent_selection: IParentSelection, mutation: IMutation, population: Population, rates: Rates) -> None:
         parent1, parent2 = parent_selection.execute(population)
 
@@ -103,6 +116,8 @@ class UniformCrossover(ICrossover):
 
         fitness1 = population.calculate_fitness(child1)
         fitness2 = population.calculate_fitness(child2)
+
+        self.logger.add_log(self, parent1, parent2, child1, child2, population)
 
         population.add(child1, fitness1)
         population.add(child2, fitness2)
