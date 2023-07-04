@@ -10,7 +10,7 @@ class Mediator:
 
     def run(self):
         cities = self.window.sc.get_cities()
-        print(cities)
+        #print(cities)
         population_size = self.window.horizontalSlider.value()
         generation_number = self.window.horizontalSlider_2.value()
         mutation_chance = self.window.horizontalSlider_3.value() / 100
@@ -20,8 +20,8 @@ class Mediator:
         mutation = self.window.comboBox_2.currentText()
         selection = self.window.comboBox_3.currentText()
         parent_selection = self.window.comboBox_4.currentText()
-        print(population_size, generation_number, mutation_chance, crossing_chance)
-        print(crossover, mutation, selection, parent_selection)
+        #print(population_size, generation_number, mutation_chance, crossing_chance)
+        #print(crossover, mutation, selection, parent_selection)
 
 
         """
