@@ -29,9 +29,11 @@ class Testing():
         self.tsp.choose_operators(mutation, crossover, selection, parent_selection)
 
     def __open_logs(self):
-        for generation_logs in self.logger.get_loggs():
-            for log in generation_logs:
-                print(log)
+        with open('logs.txt', 'w') as file:
+            for generation_logs in self.logger.get_loggs():
+                for log in generation_logs:
+                    print(log)
+                    file.write(log + '\n')
 
 test = Testing()
 
