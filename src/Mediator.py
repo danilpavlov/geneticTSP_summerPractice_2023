@@ -13,6 +13,13 @@ class Mediator:
         self.adapter = Adapter()
 
     def run(self):
+        input_method = self.window.comboBox_5.currentText()
+
+        """
+        Настроить ввод из файла/вручную/сгенерировать,
+        в данный момент все данные вводятся вручную!!!
+        """
+
         cities = self.window.sc.get_cities()
         self.adapter.make_adjacency_matrix(cities)
 
@@ -29,20 +36,8 @@ class Mediator:
         parent_selection = self.adapter.convert_parent_selection( self.window.comboBox_4.currentText() )
 
         self.tsp.choose_operators(mutation, crossover, selection, parent_selection)
-        population_history = self.tsp.run()
+        self.window.population_history = self.tsp.run()
         loggs_history = self.logger.get_loggs()
-
-        """
-        Здесь происходит инициализация алгоритма с полученными с GUI параметрами,
-        включение алгоритма, возвращение результата, что-то вроде:
-        self.tsp = TSP(..., ..., ...)
-        self.window.population_history =  self.tsp.run()
-        """
-
-        #Это тест!!! Удалить после добавления инициализации алгоритма
-        self.window.population_history = [{(0, 1, 2, 3, 0): 20, (1, 0, 2, 3, 1): 30, (3, 1, 2, 0, 3): 18,},
-                                          {(0, 1, 2, 3, 0): 21, (1, 0, 2, 3, 1): 12, (3, 1, 2, 0, 3): 15,},
-                                          {(0, 1, 2, 3, 0): 13, (1, 0, 2, 3, 1): 9, (3, 1, 2, 0, 3): 7,}]
 
     def __initialize_algorithm(self, adjacency_matrix: List[List[float]], generation_number: int, population_size: int, mutation_chance: float, crossover_chance: float):
         self.logger = Logger(generation_number)
