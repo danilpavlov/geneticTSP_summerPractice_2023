@@ -21,6 +21,8 @@ class Testing():
         population_history = self.tsp.run() 
     
         self.__open_logs()
+        print("\n LOGS")
+        print(self.logger.get_loggs())
         return population_history
         
     def __choose_operators(self, mutation: IMutation, crossover: ICrossover, selection: ISelection, parent_selection: IParentSelection):
@@ -34,8 +36,8 @@ class Testing():
 test = Testing()
 
 node_set = [[1.1, 1.1], [2.1, 2.3], [3.1, 3.0], [100.1, 124.4]]
-population_size = 20
-generations_number = 1000
+population_size = 10
+generations_number = 5
 mutation_rate = 0.15
 crossover_rate = 0.8
 
@@ -43,6 +45,4 @@ crossover_rate = 0.8
 #population_history = test.execute(data.node_set, data.population_size, data.generations_number, data.mutation_rate, data.crossover_rate)
 #print(population_history)
 population_history = test.execute(node_set, population_size, generations_number, mutation_rate, crossover_rate)
-print(population_history[0])
-print(population_history[-1])
 

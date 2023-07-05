@@ -46,6 +46,8 @@ class Adapter:
             return UniformMutation(logger)
         elif mutation == "ScrambleMutation":
             return ScrambleMutation(logger)
+        else:
+            raise NameError(f"Mutation Class {mutation} does not exist")
 
     def convert_crossover(self, crossover: str, logger: Logger):
         if crossover == "SinglePointCrossover":
@@ -54,6 +56,8 @@ class Adapter:
             return TwoPointCrossover(logger)
         elif crossover == "UniformCrossover":
             return UniformCrossover(logger)
+        else:
+            raise NameError(f"Crossover Class {crossover} does not exist")
 
     def convert_parent_selection(self, parent_selection: str):
         if parent_selection == "Panmixia":
@@ -62,6 +66,8 @@ class Adapter:
             return TournamentParentSelection()
         elif parent_selection == "RoulleteWheelParentSelection":
             return RoulleteWheelParentSelection()
+        else:
+            raise NameError(f"ParentSelection Class {parent_selection} does not exist")
 
     def convert_selection(self, selection: str):
         if selection == "RandomSelection":
@@ -70,3 +76,5 @@ class Adapter:
             return EliteSelection()
         elif selection == "ExclusionSelection":
             return ExclusionSelection()
+        else:
+            raise NameError(f"Selection Class {selection} does not exist")
