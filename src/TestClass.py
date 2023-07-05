@@ -1,7 +1,3 @@
-from GeneticTSP.Strategy.Strategies.Mutations import *
-from GeneticTSP.Strategy.Strategies.Crossovers import *
-from GeneticTSP.Strategy.Strategies.Selections import *
-from GeneticTSP.Strategy.Strategies.ParentSelections import *
 from GeneticTSP.TSP import *
 from Adapter import *
 from Reader import *

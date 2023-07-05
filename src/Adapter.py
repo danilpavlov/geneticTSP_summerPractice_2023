@@ -2,6 +2,12 @@ from dataclasses import dataclass
 from math import sqrt
 from typing import List, Tuple
 
+from GeneticTSP.Strategy.Strategies.Mutations import *
+from GeneticTSP.Strategy.Strategies.Crossovers import *
+from GeneticTSP.Strategy.Strategies.Selections import *
+from GeneticTSP.Strategy.Strategies.ParentSelections import *
+from GeneticTSP.Logger import *
+
 
 class Adapter:
     """
@@ -33,3 +39,34 @@ class Adapter:
         x2, y2 = node2
         return sqrt((x2 - x1)**2 + (y2 - y1)**2)
 
+    def convert_mutation(self, mutation: str, logger: Logger):
+        if mutation == "SwapMutation":
+            return SwapMutation(logger)
+        elif mutation == "UniformMutation":
+            return UniformMutation(logger)
+        elif mutation == "ScrambleMutation":
+            return ScrambleMutation(logger)
+
+    def convert_crossover(self, crossover: str, logger: Logger):
+        if crossover == "SinglePointCrossover":
+            return SinglePointCrossover(logger)
+        elif crossover == "TwoPointCrossover":
+            return TwoPointCrossover(logger)
+        elif crossover == "UniformCrossover":
+            return UniformCrossover(logger)
+
+    def convert_parent_selection(self, parent_selection: str):
+        if parent_selection == "Panmixia":
+            return Panmixia()
+        elif parent_selection == "TournamentParentSelection":
+            return TournamentParentSelection()
+        elif parent_selection == "RoulleteWheelParentSelection":
+            return RoulleteWheelParentSelection()
+
+    def convert_selection(self, selection: str):
+        if selection == "RandomSelection":
+            return RandomSelection()
+        elif selection == "EliteSelection":
+            return EliteSelection()
+        elif selection == "ExclusionSelection":
+            return ExclusionSelection()
