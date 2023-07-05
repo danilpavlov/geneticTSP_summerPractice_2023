@@ -1,6 +1,8 @@
 from GUI.gui import *
 from GeneticTSP.TSP import *
 from Adapter import *
+from Reader import *
+from Generator import *
 
 
 class Mediator:
@@ -13,12 +15,6 @@ class Mediator:
         self.adapter = Adapter()
 
     def run(self):
-        input_method = self.window.comboBox_5.currentText()
-
-        """
-        Настроить ввод из файла/вручную/сгенерировать,
-        в данный момент все данные вводятся вручную!!!
-        """
 
         cities = self.window.sc.get_cities()
         self.adapter.make_adjacency_matrix(cities)
@@ -41,5 +37,13 @@ class Mediator:
 
     def __initialize_algorithm(self, adjacency_matrix: List[List[float]], generation_number: int, population_size: int, mutation_chance: float, crossover_chance: float):
         self.logger = Logger(generation_number)
-        self.tsp = TSP(self.adapter.get_adjacency_matrix(), generation_number, population_size, mutation_chance, crossover_chance, self.logger)  
+        self.tsp = TSP(self.adapter.get_adjacency_matrix(), generation_number, population_size, mutation_chance, crossover_chance, self.logger)
+
+    def generate_data(self):
+        gen_cities = Generator().generate_data()
+        self.window.sc.set_cities(gen_cities)
+
+    def read_data(self, path):
+        file_cities = Reader(path).read_data()
+        self.window.sc.set_cities(file_cities)
 

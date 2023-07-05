@@ -24,7 +24,7 @@ class MyPaintWidget(QtWidgets.QWidget):
         x = event.xdata
         y = event.ydata
 
-        if x > 1 and y > 1:
+        if x and y and x > 1 and y > 1:
             self.axes.scatter(x, y, s=30)
             self.cities.append((x, y))
             self.figure.canvas.draw()
@@ -32,11 +32,14 @@ class MyPaintWidget(QtWidgets.QWidget):
     def get_cities(self):
         return self.cities
 
+    def set_cities(self, cities):
+        self.cities.extend(cities)
+
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(848, 859)
+        MainWindow.resize(951, 859)
         font = QtGui.QFont()
         font.setFamily("Tahoma")
         MainWindow.setFont(font)
@@ -238,32 +241,60 @@ class Ui_MainWindow(object):
         self.label_8.setObjectName("label_8")
 
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_2.setGeometry(QtCore.QRect(740, 100, 93, 28))
+        self.pushButton_2.setGeometry(QtCore.QRect(735, 150, 180, 28))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
+        font.setPointSize(10)
         self.pushButton_2.setFont(font)
         self.pushButton_2.setObjectName("pushButton_2")
 
         self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_3.setGeometry(QtCore.QRect(740, 130, 93, 28))
+        self.pushButton_3.setGeometry(QtCore.QRect(735, 180, 180, 28))
         font = QtGui.QFont()
         font.setFamily("Tahoma")
+        font.setPointSize(10)
         self.pushButton_3.setFont(font)
         self.pushButton_3.setObjectName("pushButton_3")
 
         self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_4.setGeometry(740, 250, 93, 28)
+        self.pushButton_4.setGeometry(735, 300, 180, 28)
         font = QtGui.QFont()
         font.setFamily("Tahoma")
+        font.setPointSize(10)
         self.pushButton_4.setFont(font)
         self.pushButton_4.setObjectName("pushButton_4")
 
         self.pushButton_5 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_5.setGeometry(740, 280, 93, 28)
+        self.pushButton_5.setGeometry(735, 330, 180, 28)
         font = QtGui.QFont()
         font.setFamily("Tahoma")
+        font.setPointSize(10)
         self.pushButton_5.setFont(font)
         self.pushButton_5.setObjectName("pushButton_5")
+
+        self.pushButton_6 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_6.setGeometry(735, 35, 180, 28)
+        font = QtGui.QFont()
+        font.setFamily("Tahoma")
+        font.setPointSize(10)
+        self.pushButton_6.setFont(font)
+        self.pushButton_6.setObjectName("pushButton_6")
+
+        self.pushButton_7 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_7.setGeometry(735, 65, 180, 28)
+        font = QtGui.QFont()
+        font.setFamily("Tahoma")
+        font.setPointSize(10)
+        self.pushButton_7.setFont(font)
+        self.pushButton_7.setObjectName("pushButton_7")
+
+        self.pushButton_8 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_8.setGeometry(735, 95, 180, 28)
+        font = QtGui.QFont()
+        font.setFamily("Tahoma")
+        font.setPointSize(10)
+        self.pushButton_8.setFont(font)
+        self.pushButton_8.setObjectName("pushButton_8")
 
         self.label_9 = QtWidgets.QLabel(self.centralwidget)
         self.label_9.setGeometry(QtCore.QRect(220, 40, 50, 16))
@@ -298,7 +329,7 @@ class Ui_MainWindow(object):
         self.label_12.setObjectName("label_12")
 
         self.label_13 = QtWidgets.QLabel(self.centralwidget)
-        self.label_13.setGeometry(QtCore.QRect(725, 160, 121, 41))
+        self.label_13.setGeometry(QtCore.QRect(750, 210, 121, 41))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -310,10 +341,6 @@ class Ui_MainWindow(object):
         self.label_13.setFont(font)
         self.label_13.setScaledContents(False)
         self.label_13.setObjectName("label_13")
-
-        self.comboBox_5 = QtWidgets.QComboBox(self.centralwidget)
-        self.comboBox_5.setGeometry(QtCore.QRect(40, 730, 181, 22))
-        self.comboBox_5.setObjectName("comboBox_5")
 
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
@@ -343,8 +370,11 @@ class Ui_MainWindow(object):
         self.label_8.setText(_translate("MainWindow", "Вид селекции"))
         self.pushButton_2.setText(_translate("MainWindow", "Вперед"))
         self.pushButton_3.setText(_translate("MainWindow", "Назад"))
-        self.pushButton_4.setText(_translate("MainWindow", "На 1-ю стр."))
-        self.pushButton_5.setText(_translate("MainWindow", "На посл. стр."))
+        self.pushButton_4.setText(_translate("MainWindow", "На первую стр."))
+        self.pushButton_5.setText(_translate("MainWindow", "На последнюю стр."))
+        self.pushButton_6.setText(_translate("MainWindow", "Сгенерировать города"))
+        self.pushButton_7.setText(_translate("MainWindow", "Загрузить из файла"))
+        self.pushButton_8.setText(_translate("MainWindow", "Очистить города"))
         self.label_13.setText(_translate("MainWindow", "Стр. 0 из 0"))
         self.label_9.setText(str(self.horizontalSlider.value()))
         self.label_10.setText(str(self.horizontalSlider_2.value()))
@@ -354,7 +384,6 @@ class Ui_MainWindow(object):
         self.setup_combobox_mutation()
         self.setup_combobox_selection()
         self.setup_combobox_parent_selection()
-        self.setup_combobox_input()
 
     def set_mediator(self, mediator):
         self.mediator = mediator
@@ -369,9 +398,17 @@ class Ui_MainWindow(object):
         self.pushButton_3.clicked.connect(self.backward)
         self.pushButton_4.clicked.connect(self.go_to_first_page)
         self.pushButton_5.clicked.connect(self.go_to_last_page)
+        self.pushButton_6.clicked.connect(self.generate_cities)
+        self.pushButton_7.clicked.connect(self.read_cities)
+        self.pushButton_8.clicked.connect(self.remove_cities)
 
     def start(self):
         self.mediator.run()
+        self.sc.axes.clear()
+        self.sc.axes2.clear()
+        self.sc.axes.set_xlim([1, 30])
+        self.sc.axes.set_ylim([1, 30])
+        self.draw_cities()
         self.draw_cost_function()
         self.current_index = len(self.population_history) - 1
         self.step = int(0.05 * len(self.population_history))
@@ -393,7 +430,7 @@ class Ui_MainWindow(object):
             x = [self.sc.cities[way[i]][0], self.sc.cities[way[i + 1]][0]]
             y = [self.sc.cities[way[i]][1], self.sc.cities[way[i + 1]][1]]
             self.sc.axes.plot(x, y)
-            self.sc.figure.canvas.draw()
+        self.sc.figure.canvas.draw()
 
     def draw_cost_function(self):
         x = list(range(len(self.population_history)))
@@ -406,48 +443,51 @@ class Ui_MainWindow(object):
             x = item[0]
             y = item[1]
             self.sc.axes.scatter(x, y)
+        self.sc.figure.canvas.draw()
 
     def forward(self):
-        self.sc.axes.clear()
-        self.sc.axes.set_xlim([1, 30])
-        self.sc.axes.set_ylim([1, 30])
-        self.draw_cities()
         if self.population_history and self.current_index + self.step < len(self.population_history):
+            self.sc.axes.clear()
+            self.sc.axes.set_xlim([1, 30])
+            self.sc.axes.set_ylim([1, 30])
+            self.draw_cities()
             self.current_index += self.step
             self.current_page += 1
             self.draw_history(self.current_index)
             self.change_page_label()
 
     def backward(self):
-        self.sc.axes.clear()
-        self.sc.axes.set_xlim([1, 30])
-        self.sc.axes.set_ylim([1, 30])
-        self.draw_cities()
         if self.population_history and self.current_index - self.step >= 0:
+            self.sc.axes.clear()
+            self.sc.axes.set_xlim([1, 30])
+            self.sc.axes.set_ylim([1, 30])
+            self.draw_cities()
             self.current_index -= self.step
             self.current_page -= 1
             self.draw_history(self.current_index)
             self.change_page_label()
 
     def go_to_first_page(self):
-        self.sc.axes.clear()
-        self.sc.axes.set_xlim([1, 30])
-        self.sc.axes.set_ylim([1, 30])
-        self.draw_cities()
-        self.current_index = len(self.population_history) - (self.pages - 1) * self.step
-        self.current_page = 1
-        self.draw_history(self.current_index)
-        self.change_page_label()
+        if self.population_history:
+            self.sc.axes.clear()
+            self.sc.axes.set_xlim([1, 30])
+            self.sc.axes.set_ylim([1, 30])
+            self.draw_cities()
+            self.current_index = len(self.population_history) - (self.pages - 1) * self.step
+            self.current_page = 1
+            self.draw_history(self.current_index)
+            self.change_page_label()
 
     def go_to_last_page(self):
-        self.sc.axes.clear()
-        self.sc.axes.set_xlim([1, 30])
-        self.sc.axes.set_ylim([1, 30])
-        self.draw_cities()
-        self.current_index = len(self.population_history) - 1
-        self.current_page = self.pages
-        self.draw_history(self.current_index)
-        self.change_page_label()
+        if self.population_history:
+            self.sc.axes.clear()
+            self.sc.axes.set_xlim([1, 30])
+            self.sc.axes.set_ylim([1, 30])
+            self.draw_cities()
+            self.current_index = len(self.population_history) - 1
+            self.current_page = self.pages
+            self.draw_history(self.current_index)
+            self.change_page_label()
 
     def change_page_label(self):
         self.label_13.setText('Стр. ' + str(self.current_page) + ' из ' + str(self.pages))
@@ -476,5 +516,21 @@ class Ui_MainWindow(object):
     def setup_combobox_parent_selection(self):
         self.comboBox_4.addItems(['Panmixia', 'TournamentParentSelection', 'RoulleteWheelParentSelection'])
 
-    def setup_combobox_input(self):
-        self.comboBox_5.addItems(['Ввести вручную', 'Загрузить из файла', 'Сгенерировать'])
+    def read_cities(self):
+        path = QtWidgets.QFileDialog.getOpenFileName(self.centralwidget, 'Open File', '.', 'TXT File (*.txt)')[0]
+        if path:
+            self.mediator.read_data(path)
+            self.draw_cities()
+
+    def generate_cities(self):
+        self.mediator.generate_data()
+        self.draw_cities()
+
+    def remove_cities(self):
+        self.sc.cities.clear()
+        self.population_history = None
+        self.sc.axes.clear()
+        self.sc.axes2.clear()
+        self.sc.axes.set_xlim([1, 30])
+        self.sc.axes.set_ylim([1, 30])
+        self.sc.figure.canvas.draw()
