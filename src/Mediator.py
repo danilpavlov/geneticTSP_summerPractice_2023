@@ -34,6 +34,7 @@ class Mediator:
         self.tsp.choose_operators(mutation, crossover, selection, parent_selection)
         self.window.population_history = self.tsp.run()
         loggs_history = self.logger.get_loggs()
+        self.logger.save_loggs(loggs_history)
 
     def __initialize_algorithm(self, adjacency_matrix: List[List[float]], generation_number: int, population_size: int, mutation_chance: float, crossover_chance: float):
         self.logger = Logger(generation_number)
