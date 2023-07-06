@@ -20,9 +20,11 @@ class Testing():
 
         population_history = self.tsp.run() 
     
-        self.__open_logs()
+        #self.__open_logs()
         print("\n LOGS")
-        print(self.logger.get_loggs())
+        logs = self.logger.get_loggs()
+        print(logs)
+        self.logger.save_loggs(logs)
         return population_history
         
     def __choose_operators(self, mutation: IMutation, crossover: ICrossover, selection: ISelection, parent_selection: IParentSelection):
@@ -48,3 +50,6 @@ crossover_rate = 0.8
 #print(population_history)
 population_history = test.execute(node_set, population_size, generations_number, mutation_rate, crossover_rate)
 
+generator = Generator()
+generator.generate_data()
+generator.save_data()

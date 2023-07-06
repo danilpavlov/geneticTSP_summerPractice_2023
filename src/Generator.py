@@ -1,7 +1,7 @@
 import random
 class Generator:
-    def __init__(self, filename='gen.txt'):
-        self.filename = filename
+    def __init__(self):
+        self.filename = 'txt-files/gen.txt'
         self.n = 5
         self.node_set = []
 
@@ -13,7 +13,7 @@ class Generator:
         return self.node_set
 
 #это можно не сохранять, а проcто дaнные читать
-    def save_data(self, filename):
-        with open(filename, 'w') as file:
+    def save_data(self):
+        with open(self.filename, 'w') as file:
             node_set_line = ', '.join([' '.join(str(coord) for coord in node) for node in self.node_set])
             file.write(node_set_line + '\n')
