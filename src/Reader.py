@@ -12,5 +12,6 @@ class Reader:
             nodes = node_set_line.split(',')
             for node in nodes:
                 coords = node.split()
-                self.node_set.append((float(coords[0]), float(coords[1])))
+                if 1 < float(coords[0]) < 30 and 1 < float(coords[1]) < 30:
+                    self.node_set.append((float(coords[0]), float(coords[1])))
         return self.node_set
