@@ -8,6 +8,12 @@ class Logger:
         
     def get_loggs(self) -> List[List[str]]:
         return self.loggs
+
+    def save_loggs(self, loggs):
+        with open('txt-files/logs.txt', 'w') as file:
+            for log in loggs:
+                log_line = ','.join(log)
+                file.write(log_line + '\n')
     
     def next_generation(self):
         self.current_generation += 1
